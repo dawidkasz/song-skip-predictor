@@ -3,14 +3,14 @@ from typing import Annotated
 
 from fastapi import Depends
 
-from src.predictor_model_provider import ModelProviderDependency
+from src.predictor_model_provider import ModelDependency
 from src.schemas import ModelInput, ModelOutput
 
 logger = logging.getLogger(__name__)
 
 
 class SkipPredictService:
-    def __init__(self, predictor: ModelProviderDependency) -> None:
+    def __init__(self, predictor: ModelDependency) -> None:
         self._predictor = predictor
 
     def predict(self, request: ModelInput) -> ModelOutput:

@@ -1,6 +1,6 @@
 import logging
 import random
-from typing import Annotated, Callable, TypeAlias
+from typing import Annotated
 
 from fastapi import Depends
 
@@ -11,8 +11,6 @@ from src.predictor_model import (
 )
 
 logger = logging.getLogger(__name__)
-
-ModelProvider: TypeAlias = Callable[[], AbstractSkipPredictor]
 
 
 class MockRandomForestLoadedFromPickle:
@@ -33,4 +31,4 @@ def provide_random_model() -> AbstractSkipPredictor:
     return model
 
 
-ModelProviderDependency = Annotated[ModelProvider, Depends(provide_random_model)]
+ModelDependency = Annotated[AbstractSkipPredictor, Depends(provide_random_model)]
