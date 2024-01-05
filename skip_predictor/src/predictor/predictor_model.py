@@ -11,6 +11,11 @@ class AbstractSkipPredictor(abc.ABC):
     def predict(self, x: list) -> str:
         pass
 
+    @property
+    @abc.abstractmethod
+    def name(self) -> str:
+        pass
+
     @classmethod
     @abc.abstractmethod
     def from_pickle(cls, pickle_path: str) -> "AbstractSkipPredictor":
@@ -29,6 +34,10 @@ class RandomForestSkipPredictor(AbstractSkipPredictor):
     def predict(self, x: list) -> str:
         return self._model.predict(x)
 
+    @property
+    def name(self) -> str:
+        return "random_forest"
+
     @classmethod
     def from_pickle(cls, pickle_path: str) -> "AbstractSkipPredictor":
         return cls(cls._load_model(pickle_path))
@@ -37,6 +46,10 @@ class RandomForestSkipPredictor(AbstractSkipPredictor):
 class MockSkipPredictor(AbstractSkipPredictor):
     def predict(self, x: list) -> str:
         return "yes" if random.randint(0, 1) == 0 else "no"
+
+    @property
+    def name(self) -> str:
+        return "mock"
 
     @classmethod
     def from_pickle(cls, pickle_path: str) -> "AbstractSkipPredictor":

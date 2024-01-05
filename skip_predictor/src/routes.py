@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.predictor_service import SkipPredictServiceDependency
+from src.predictor.predictor_service import SkipPredictServiceDependency
 from src.schemas import ModelInput, ModelOutput
 
 predict_router = APIRouter()
