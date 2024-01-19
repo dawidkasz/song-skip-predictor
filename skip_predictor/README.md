@@ -13,7 +13,7 @@ If you do not want to run service in a container then instead of using `docker c
 
 ## Running tests
 
-[Integration tests](test/test_integration) require the same setup as a complete application: `.env` configuration. If you want to run tests locally, outside of the docker container, you can:
+[Integration tests](test/test_integration) require the same setup as a complete application. If you want to run tests locally, outside of the docker container, you can:
 1. Run `cp .env.example .env`.
 2. Start the default `DB__HOST` value to `localhost`.
 3. Run `docker compose -f docker-compose-test.yml up`.
