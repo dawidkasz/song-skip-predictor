@@ -4,8 +4,6 @@ from pydantic import BaseModel
 class ModelInput(BaseModel):
     isliked: bool
     timestamp: str
-    block_duration: str
-    song_listened: float
     previous_song_listened: float
     song_listened_rate: float
     session_duration: str
@@ -15,8 +13,6 @@ class ModelInput(BaseModel):
     session_skip_rate: float
     session_ewma_rate: float
     previous_action: bool
-    user_listen_time: str
-    user_skip_count: int
     user_listen_time: str
     user_skip_count: int
     user_like_count: int
@@ -31,8 +27,8 @@ class ModelInput(BaseModel):
     release_daymonth: int
     date_completeness: str
     duration_ms: int
-    music1: float
-    music2: float
+    MUSIC1: float
+    MUSIC2: float
     fav_genres_similarity: int
 
     def to_vector(self) -> list:
@@ -40,4 +36,4 @@ class ModelInput(BaseModel):
 
 
 class ModelOutput(BaseModel):
-    isskipped: str
+    isskipped: bool

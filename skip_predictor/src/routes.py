@@ -10,4 +10,6 @@ predict_router = APIRouter()
 def predict(
     request: ModelInput, predict_service: SkipPredictServiceDependency
 ) -> ModelOutput:
+    """Predicts whether user will skip the song"""
+
     return predict_service.predict(request)

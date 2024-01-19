@@ -3,12 +3,13 @@ import random
 from typing import Any
 
 import joblib
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
 
 class AbstractSkipPredictor(abc.ABC):
     @abc.abstractmethod
-    def predict(self, x: list) -> bool:
+    def predict(self, x: pd.DataFrame) -> bool:
         pass
 
     @property
@@ -31,8 +32,8 @@ class RandomForestSkipPredictor(AbstractSkipPredictor):
     def __init__(self, model: RandomForestClassifier) -> None:
         self._model = model
 
-    def predict(self, x: list) -> bool:
-        return self._model.predict(x)
+    def predict(self, x: pd.DataFrame) -> bool:
+        return bool(self._model.predict(x)[0])
 
     @property
     def name(self) -> str:
@@ -47,13 +48,12 @@ class DecisionTreeSkipPredictor(AbstractSkipPredictor):
     def __init__(self, model: RandomForestClassifier) -> None:
         self._model = model
 
-    def predict(self, x: list) -> bool:
-        print(type(self._model))
-        return self._model.predict(x)
+    def predict(self, x: pd.DataFrame) -> bool:
+        return bool(self._model.predict(x)[0])
 
     @property
     def name(self) -> str:
-        return "random_forest"
+        return "decision_tree"
 
     @classmethod
     def from_pickle(cls, pickle_path: str) -> "AbstractSkipPredictor":
@@ -61,8 +61,8 @@ class DecisionTreeSkipPredictor(AbstractSkipPredictor):
 
 
 class MockSkipPredictor(AbstractSkipPredictor):
-    def predict(self, x: list) -> bool:
-        return random.randint(0, 1)
+    def predict(self, x: pd.DataFrame) -> bool:
+        return bool(random.randint(0, 1))
 
     @property
     def name(self) -> str:

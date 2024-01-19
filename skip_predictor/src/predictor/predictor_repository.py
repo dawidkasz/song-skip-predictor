@@ -20,13 +20,13 @@ class AbstractPredictorRepository(abc.ABC):
 
 
 class PredictorRepositoryMongo(AbstractPredictorRepository):
-    _COLLECTION_NAME = "predictions"
+    COLLECTION_NAME = "predictions"
 
     def __init__(self, session: DbSession) -> None:
         self._session = session
         self._mongo_client = self._session.client
         self._db = self._mongo_client[settings.db.db_name]
-        self.collection = self._db[self._COLLECTION_NAME]
+        self.collection = self._db[self.COLLECTION_NAME]
 
     def save(
         self, model_name: str, model_input: ModelInput, model_output: ModelOutput
