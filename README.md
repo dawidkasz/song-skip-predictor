@@ -1,3 +1,3 @@
 # Song skip predictor
 
-A microservice writtern in Python serving a **Random Forest** model, gives a prediction whether a user will skip or listen to the entire song.
+A microservice written in Python featuring a **Random Forest** model, which gives predictions about whether a user will skip or listen to the entire song.
